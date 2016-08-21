@@ -1,0 +1,5 @@
+/home/nik/projects/tools/BashDotNet/BashDotNet/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/home/nik/projects/tools/BashDotNet/BashDotNet/bin/Debug/BashDotNet.dll.mdb
+/home/nik/projects/tools/BashDotNet/BashDotNet/bin/Debug/BashDotNet.dll
+/home/nik/projects/tools/BashDotNet/BashDotNet/obj/Debug/BashDotNet.dll
+/home/nik/projects/tools/BashDotNet/BashDotNet/obj/Debug/BashDotNet.dll.mdb
