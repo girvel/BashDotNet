@@ -1,0 +1,7 @@
+/home/nik/projects/tools/BashDotNet/BashDemo/obj/Release/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/home/nik/projects/tools/BashDotNet/BashDemo/bin/Release/BashDemo.exe.mdb
+/home/nik/projects/tools/BashDotNet/BashDemo/bin/Release/BashDemo.exe
+/home/nik/projects/tools/BashDotNet/BashDemo/obj/Release/BashDemo.exe
+/home/nik/projects/tools/BashDotNet/BashDemo/obj/Release/BashDemo.exe.mdb
+/home/nik/projects/tools/BashDotNet/BashDemo/bin/Release/BashDotNet.dll
+/home/nik/projects/tools/BashDotNet/BashDemo/bin/Release/BashDotNet.dll.mdb

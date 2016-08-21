@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BashDotNet", "BashDotNet\BashDotNet.csproj", "{CBE468E7-76B3-444B-BC40-637D65F1C74D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibrariesTest", "..\..\tests\LibrariesTest\LibrariesTest.csproj", "{40F59BCE-A12B-43D4-86B7-AF8673C8A0BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BashDemo", "BashDemo\BashDemo.csproj", "{6AD87B6D-A2B7-49F9-8226-B879F66F5756}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,12 +12,12 @@ Global
 		Unity|Any CPU = Unity|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{40F59BCE-A12B-43D4-86B7-AF8673C8A0BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{40F59BCE-A12B-43D4-86B7-AF8673C8A0BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{40F59BCE-A12B-43D4-86B7-AF8673C8A0BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{40F59BCE-A12B-43D4-86B7-AF8673C8A0BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{40F59BCE-A12B-43D4-86B7-AF8673C8A0BD}.Unity|Any CPU.ActiveCfg = Unity|Any CPU
-		{40F59BCE-A12B-43D4-86B7-AF8673C8A0BD}.Unity|Any CPU.Build.0 = Unity|Any CPU
+		{6AD87B6D-A2B7-49F9-8226-B879F66F5756}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AD87B6D-A2B7-49F9-8226-B879F66F5756}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AD87B6D-A2B7-49F9-8226-B879F66F5756}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AD87B6D-A2B7-49F9-8226-B879F66F5756}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AD87B6D-A2B7-49F9-8226-B879F66F5756}.Unity|Any CPU.ActiveCfg = Release|Any CPU
+		{6AD87B6D-A2B7-49F9-8226-B879F66F5756}.Unity|Any CPU.Build.0 = Release|Any CPU
 		{CBE468E7-76B3-444B-BC40-637D65F1C74D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CBE468E7-76B3-444B-BC40-637D65F1C74D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBE468E7-76B3-444B-BC40-637D65F1C74D}.Release|Any CPU.ActiveCfg = Release|Any CPU

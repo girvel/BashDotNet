@@ -1,1 +1,1 @@
-﻿<Properties StartupItem="../../tests/LibrariesTest/LibrariesTest.csproj" />
+﻿<Properties StartupItem="BashDemo/BashDemo.csproj" />
