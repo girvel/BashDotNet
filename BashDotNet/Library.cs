@@ -35,13 +35,18 @@ namespace BashDotNet
             // TODO change algorythm
             var elements = stringCommand.ParseCommand(' ');
 
-            var name = elements.Slice(0, NameLength).Aggregate(
-                (sum, e) => sum + " " + e);
+            if (elements.Length < NameLength)
+            {
+                return false;
+            }
 
-            name = name.Substring(0, name.Length - 1);
+            var name = elements.Slice(0, NameLength - 1)
+                .Aggregate((sum, e) => sum + " " + e);
 
             var command = Commands.Find(c => c.Name == name);
-            if (command == null)
+
+            if (command == null
+                || elements.Length < NameLength + command.PositionalArguments.Length)
             {
                 return false;
             }
@@ -49,114 +54,119 @@ namespace BashDotNet
             var options = command.GenerateDefaultOptions();
             var positionalArgs = new Dictionary<string, string>();
 
-            if (elements.Length - NameLength < command.PositionalArguments.Length)
+            for (var i = 0; i < command.PositionalArguments.Length; i++)
             {
-                return false;
+                positionalArgs[command.PositionalArguments[i]] = elements[i + NameLength];
             }
 
-            for (var i = NameLength; i < elements.Length; i++)
+            for (var i = NameLength + positionalArgs.Count; i < elements.Length; i++)
             {
-                var e = elements[i];
-                if (i - NameLength < command.PositionalArguments.Length)
-                {
-                    positionalArgs[command.PositionalArguments[i - NameLength]] = e;
-                }
-                else if (e.StartsWith("-"))
-                {
-                    e = e.Substring(1);
-                    string value;
+                var element = elements[i];
 
-                    if (e.StartsWith("-"))
+                Option option = null;
+                string value = "";
+                if (element.StartsWith("--"))
+                {
+                    element = element.Substring(2);
+
+                    var parts = element.ParseCommand('=');
+                    switch (parts.Length)
                     {
-                        e = e.Substring(1);
+                        case 1:
+                            option = command.Options.FirstOrDefault(o => o.LongName == element);
+                            break;
 
-                        if (!_getOption(elements, ref i, ref e, out value))
-                        {
+                        case 2:
+                            option = command.Options.FirstOrDefault(
+                                o => o.LongName == parts[0]);
+                            value = parts[1];
+                            break;
+
+                        default:
                             return false;
-                        }
+                    }
+                }
+                else if (element.StartsWith("-"))
+                {
+                    element = element.Substring(1);
 
-                        var option = command.Options.FirstOrDefault(o => o.LongName == e);
+                    if (element.Length == 0)
+                    {
+                        return false;
+                    }
 
+                    var parts = element.ParseCommand('=');
+
+                    if (parts.Length > 2)
+                    {
+                        return false;
+                    }
+
+                    var chars = parts[0];
+
+                    for (var i2 = 0; i2 < chars.Length - 1; i2++)
+                    {
+                        var character = chars[i2];
+                        option = command.Options.FirstOrDefault(o => o.ShortName == character);
+
+                        // TODO return position with error
                         if (option == null)
                         {
                             return false;
                         }
 
-                        options[option.Name] = value;
+                        // TODO true to const
+                        options[option.Name] = "true";
                     }
-                    else
+
+                    switch (parts.Length)
                     {
-                        for (var i2 = 0; i2 < e.Length; i2++)
-                        {
-                            string c;
-                            if (i2 + 1 < e.Length && e[i2 + 1] == '=')
-                            {
-                                c = e.Substring(i2);
-                                i2 = e.Length;
-                            }
-                            else
-                            {
-                                c = e[i2].ToString();
-                            }
+                        case 1:
+                            option = command.Options.FirstOrDefault(o => o.ShortName == chars.Last());
+                            break;
 
-                            if (!_getOption(elements, ref i, ref c, out value))
-                            {
-                                return false;
-                            }
-
-                            var option = command.Options.FirstOrDefault(o => o.ShortName.ToString() == c);
-
-                            if (option == null)
-                            {
-                                return false;
-                            }
-
-                            options[option.Name] = value;
-                        }
+                        case 2:
+                            option = command.Options.FirstOrDefault(
+                                o => o.ShortName == chars.Last());
+                            value = parts[1];
+                            break;
                     }
+
                 }
                 else
                 {
                     return false;
                 }
-            }
 
-            command.Execute(positionalArgs, options);
-
-            return true;
-        }
-
-        private bool _getOption(string[] elements, ref int i, ref string option, out string value)
-        {
-            if (elements[i][elements[i].Length - 1] == option[option.Length - 1]
-                && i + 1 < elements.Length 
-                && !elements[i + 1].StartsWith("-"))
-            {
-                value = elements[i + 1];
-                i++;
-            }
-            else
-            {
-                var parts = option.ParseCommand('=');
-
-                if (parts.Length == 1)
+                string optionName;
+                if (option == null)
                 {
-                    value = "true";
+                    return false;
                 }
                 else
                 {
-                    if (parts.Length > 2)
+                    optionName = option.Name;
+                }
+
+                if (value == "")
+                {
+                    if (i + 1 < elements.Length && !elements[i + 1].StartsWith("-"))
                     {
-                        value = "";
-                        return false;
+                        options[optionName] = elements[++i];
                     }
                     else
                     {
-                        option = parts[0];
-                        value = parts[1];
+                        options[optionName] = "true";
                     }
                 }
+                else
+                {
+                    options[optionName] = value;
+                }
             }
+            
+
+            command.Execute(positionalArgs, options);
 
             return true;
         }

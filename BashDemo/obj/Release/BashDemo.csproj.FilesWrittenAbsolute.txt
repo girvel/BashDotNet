@@ -6,3 +6,4 @@
 /home/nik/projects/tools/BashDotNet/BashDemo/bin/Release/BashDotNet.dll
 /home/nik/projects/tools/BashDotNet/BashDemo/bin/Release/BashDotNet.dll.mdb
 /home/nik/projects/tools/BashDotNet/BashDemo/bin/Release/EnumerableExtensions.dll
+/home/nik/projects/tools/BashDotNet/BashDemo/bin/Release/BashDotNet-old.dll

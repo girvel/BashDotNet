@@ -1,5 +1,6 @@
 ﻿using System;
 using BashDotNet;
+using System.Diagnostics;
 
 namespace BashDemo
 {
@@ -9,9 +10,9 @@ namespace BashDemo
 
         static MainClass()
         {
-            library = new Library(2,
+            library = new Library(1,
                 new Command(
-                    "echo write", new[] { "text" },
+                    "echo", new[] { "text" },
                     new[] { 
                         new Option("color", "color", 'c'),
                         new Option("header", "header", 'h'),
