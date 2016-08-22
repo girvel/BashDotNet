@@ -3,3 +3,4 @@
 /home/nik/projects/tools/BashDotNet/BashDotNet/bin/Debug/BashDotNet.dll
 /home/nik/projects/tools/BashDotNet/BashDotNet/obj/Debug/BashDotNet.dll
 /home/nik/projects/tools/BashDotNet/BashDotNet/obj/Debug/BashDotNet.dll.mdb
+/home/nik/projects/tools/BashDotNet/BashDotNet/bin/Debug/EnumerableExtensions.dll

@@ -10,17 +10,35 @@ Allows to create commands:
 interpreter = new Interpreter(
     new Command(
         "echo", new[] { "text" },
-        new[] { new Option("red", "red", 'r') },
+        new[] { 
+            new Option("color", "color", 'c'),
+            new Option("header", "header", 'h'),
+        },
         (args, opts) =>
         {
-            if (opts["red"] == "true")
+            switch (opts["color"])
             {
-                Console.ForegroundColor = ConsoleColor.Red;
+                case "red":
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    break;
+
+                case "green":
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    break;
+
+                case "blue":
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    break;
             }
 
             Console.WriteLine(args["text"]);
+            if (opts["header"] == "true")
+            {
+                Console.WriteLine(new string('=', args["text"].Length) + '\n');
+            }
 
-            if (opts["red"] == "true")
+            // TODO types
+            if (opts["color"] != "false")
             {
                 Console.ResetColor();
             }
@@ -39,6 +57,19 @@ if (!interpreter.TryExecute(Console.ReadLine()))
 Output:
 
 ```bash
-$ echo "hello world" -r
+$ echo "hello world" -hc=red
 hello world
+==========
 ```
+
+Also you can create commands with longer names:
+
+```C#
+interpreter = new Interpreter(2,
+    new Command(
+        "echo write", new[] { "text" },
+// ...
+```
+
+![Screenshot 2](screenshot_longnames.png)
+

@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using EnumerableExtensions;
 
 namespace BashDotNet
 {
     public class Interpreter
     {
-        // TODO name: 1 or 2 words : bool
+        /// <summary>
+        /// How many words it must interprete as a name
+        /// </summary>
+        public int NameLength { get; set; }
+
         /// <summary>
         /// List of all possible commands, which can be used from console
         /// </summary>
@@ -16,12 +21,10 @@ namespace BashDotNet
         /// <summary>
         /// Initializes a new instance of the <see cref="BashDotNet.Interpreter"/> class.
         /// </summary>
-        /// <param name="commands">
-        /// Value for <see cref="Interpreter.Commands"/>; list of all possible commands
-        /// </param>
-        public Interpreter(params Command[] commands)
+        public Interpreter(int nameLength, params Command[] commands)
         {
             Commands = new List<Command>(commands);
+            NameLength = nameLength;
         }
 
         /// <summary>
@@ -32,7 +35,12 @@ namespace BashDotNet
             // TODO change algorythm
             var elements = stringCommand.ParseCommand(' ');
 
-            var command = Commands.Find(c => c.Name == elements[0]);
+            var name = elements.Slice(0, NameLength).Aggregate(
+                (sum, e) => sum + " " + e);
+
+            name = name.Substring(0, name.Length - 1);
+
+            var command = Commands.Find(c => c.Name == name);
             if (command == null)
             {
                 return false;
@@ -41,17 +49,17 @@ namespace BashDotNet
             var options = command.GenerateDefaultOptions();
             var positionalArgs = new Dictionary<string, string>();
 
-            if (elements.Length < command.PositionalArguments.Length)
+            if (elements.Length - NameLength < command.PositionalArguments.Length)
             {
                 return false;
             }
 
-            for (var i = 1; i < elements.Length; i++)
+            for (var i = NameLength; i < elements.Length; i++)
             {
                 var e = elements[i];
-                if (i <= command.PositionalArguments.Length)
+                if (i - NameLength < command.PositionalArguments.Length)
                 {
-                    positionalArgs[command.PositionalArguments[i - 1]] = e;
+                    positionalArgs[command.PositionalArguments[i - NameLength]] = e;
                 }
                 else if (e.StartsWith("-"))
                 {

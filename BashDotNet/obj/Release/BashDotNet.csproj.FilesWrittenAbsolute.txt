@@ -3,3 +3,4 @@
 /home/nik/projects/tools/BashDotNet/BashDotNet/bin/Release/BashDotNet.dll
 /home/nik/projects/tools/BashDotNet/BashDotNet/obj/Release/BashDotNet.dll
 /home/nik/projects/tools/BashDotNet/BashDotNet/obj/Release/BashDotNet.dll.mdb
+/home/nik/projects/tools/BashDotNet/BashDotNet/bin/Release/EnumerableExtensions.dll

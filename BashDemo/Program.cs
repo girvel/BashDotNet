@@ -9,9 +9,9 @@ namespace BashDemo
 
         static MainClass()
         {
-            interpreter = new Interpreter(
+            interpreter = new Interpreter(2,
                 new Command(
-                    "echo", new[] { "text" },
+                    "echo write", new[] { "text" },
                     new[] { 
                         new Option("color", "color", 'c'),
                         new Option("header", "header", 'h'),
