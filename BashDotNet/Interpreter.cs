@@ -7,13 +7,26 @@ namespace BashDotNet
     public class Interpreter
     {
         // TODO name: 1 or 2 words : bool
+        /// <summary>
+        /// List of all possible commands, which can be used from console
+        /// </summary>
+        /// <value>The commands.</value>
         public List<Command> Commands { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BashDotNet.Interpreter"/> class.
+        /// </summary>
+        /// <param name="commands">
+        /// Value for <see cref="Interpreter.Commands"/>; list of all possible commands
+        /// </param>
         public Interpreter(params Command[] commands)
         {
             Commands = new List<Command>(commands);
         }
 
+        /// <summary>
+        /// Tries to execute command
+        /// </summary>
         public bool TryExecute(string stringCommand)
         {
             // TODO change algorythm

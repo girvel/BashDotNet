@@ -1,6 +1,6 @@
 # Bash.NET
 
-[Screenshot](screenshot.png)
+![Screenshot](screenshot.png)
 
 [Download](https://github.com/girvel/BashDotNet/raw/master/BashDotNet/bin/Release/BashDotNet.dll)
 
