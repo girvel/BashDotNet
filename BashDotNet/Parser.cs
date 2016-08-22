@@ -5,7 +5,7 @@ namespace BashDotNet
 {
     internal static class Parser
     {
-        internal static string[] ParseCommand(this string str)
+        internal static string[] ParseCommand(this string str, char separator)
         {
             var result = new List<string>();
 
@@ -17,36 +17,26 @@ namespace BashDotNet
                 var prevCharacter = i == 0 ? str[0] : str[i - 1];
                 var character = str[i];
 
-                switch (character)
+                if (prevCharacter != '\\')
                 {
-                    case ' ':
-                        if (prevCharacter == '\\' || quotes)
-                        {
-                            goto default;
-                        }
+                    if (character == separator && !quotes)
+                    {
                         result.Add(currentElement);
                         currentElement = "";
-                        break;
-
-                    case '"':
-                    case '\'':
-                        if (prevCharacter == '\\')
-                        {
-                            goto default;
-                        }
+                    }
+                    // TODO quotetype
+                    else if (character == '"' || character == '\'')
+                    {
                         quotes ^= true;
-                        break;
-
-                    case '\\':
-                        if (prevCharacter == '\\')
-                        {
-                            goto default;
-                        }
-                        break;
-
-                    default:
+                    }
+                    else if (character != '\\')
+                    {
                         currentElement += character;
-                        break;
+                    }
+                }
+                else
+                {
+                    currentElement += character;
                 }
             }
 

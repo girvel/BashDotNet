@@ -1,5 +1,9 @@
 # Bash.NET
 
+[Screenshot](screenshot.png)
+
+[Download](https://github.com/girvel/BashDotNet/raw/master/BashDotNet/bin/Release/BashDotNet.dll)
+
 Allows to create commands:
 
 ```C#
