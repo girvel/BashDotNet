@@ -12,6 +12,7 @@ namespace BashDotNet
             var currentElement = "";
 
             var quotes = false;
+            var doubleQuote = false;
             for (var i = 0; i < str.Length; i++)
             {
                 var prevCharacter = i == 0 ? str[0] : str[i - 1];
@@ -25,9 +26,15 @@ namespace BashDotNet
                         currentElement = "";
                     }
                     // TODO quotetype
-                    else if (character == '"' || character == '\'')
+                    else if ((!quotes || doubleQuote) && character == '"')
                     {
                         quotes ^= true;
+                        doubleQuote = true;
+                    }
+                    else if ((!quotes || !doubleQuote) && character == '\'')
+                    {
+                        quotes ^= true;
+                        doubleQuote = false;
                     }
                     else if (character != '\\')
                     {

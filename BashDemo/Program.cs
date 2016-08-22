@@ -5,11 +5,11 @@ namespace BashDemo
 {
     internal static class MainClass
     {
-        private static Interpreter interpreter;
+        private static Library library;
 
         static MainClass()
         {
-            interpreter = new Interpreter(2,
+            library = new Library(2,
                 new Command(
                     "echo write", new[] { "text" },
                     new[] { 
@@ -51,7 +51,7 @@ namespace BashDemo
         {
             while (true)
             {
-                if (!interpreter.TryExecute(Console.ReadLine()))
+                if (!library.TryExecute(Console.ReadLine()))
                 {
                     Console.WriteLine("wrong command");
                 }

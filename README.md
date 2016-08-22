@@ -4,12 +4,15 @@
 
 [Download](https://github.com/girvel/BashDotNet/raw/master/BashDotNet/bin/Release/BashDotNet.dll)
 
-Allows to create commands:
+## Creating commands
+
+Library definition:
 
 ```C#
-interpreter = new Interpreter(
+library = new Library(2,
+library = new Library(2,
     new Command(
-        "echo", new[] { "text" },
+        "echo write", new[] { "text" },
         new[] { 
             new Option("color", "color", 'c'),
             new Option("header", "header", 'h'),
@@ -37,7 +40,6 @@ interpreter = new Interpreter(
                 Console.WriteLine(new string('=', args["text"].Length) + '\n');
             }
 
-            // TODO types
             if (opts["color"] != "false")
             {
                 Console.ResetColor();
@@ -45,10 +47,10 @@ interpreter = new Interpreter(
         }));
 ```
 
-And execute them:
+Execution:
 
 ```C#
-if (!interpreter.TryExecute(Console.ReadLine()))
+if (!library.TryExecute(Console.ReadLine()))
 {
     Console.WriteLine("wrong command");
 }
@@ -57,9 +59,9 @@ if (!interpreter.TryExecute(Console.ReadLine()))
 Output:
 
 ```bash
-$ echo "hello world" -hc=red
-hello world
-==========
+$ echo "hello 'world'" -hc=red
+hello 'world'
+=============
 ```
 
 Also you can create commands with longer names:
@@ -71,5 +73,11 @@ interpreter = new Interpreter(2,
 // ...
 ```
 
-![Screenshot 2](screenshot_longnames.png)
+Output:
+
+```bash
+$ echo write "hello world" -hc=red
+hello world
+===========
+```
 

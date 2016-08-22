@@ -5,7 +5,7 @@ using EnumerableExtensions;
 
 namespace BashDotNet
 {
-    public class Interpreter
+    public class Library
     {
         /// <summary>
         /// How many words it must interprete as a name
@@ -21,7 +21,7 @@ namespace BashDotNet
         /// <summary>
         /// Initializes a new instance of the <see cref="BashDotNet.Interpreter"/> class.
         /// </summary>
-        public Interpreter(int nameLength, params Command[] commands)
+        public Library(int nameLength, params Command[] commands)
         {
             Commands = new List<Command>(commands);
             NameLength = nameLength;
